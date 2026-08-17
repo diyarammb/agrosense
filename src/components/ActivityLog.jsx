@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Calendar, MapPin, Tag } from 'lucide-react'
+import { Calendar, MapPin } from 'lucide-react'
 const API_BASE = process.env.REACT_APP_API_URL || ''
 
 function ActivityLog() {

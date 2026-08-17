@@ -2,27 +2,27 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Droplets, TrendingUp } from 'lucide-react'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
-const API_BASE = process.env.REACT_APP_API_URL 
+const API_BASE = process.env.REACT_APP_API_URL || ''
 function SoilMonitoring() {
   const [field, setField] = useState('Field 1')
   const [soilData, setSoilData] = useState(null)
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    const fetchSoilData = async () => {
+      setLoading(true)
+      try {
+        const response = await axios.get(`${API_BASE}/api/soil-moisture?field=${field}`)
+        setSoilData(response.data)
+      } catch (error) {
+        console.error('Error fetching soil data:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
     fetchSoilData()
   }, [field])
-
-  const fetchSoilData = async () => {
-    setLoading(true)
-    try {
-      const response = await axios.get(`${API_BASE}/api/soil-moisture?field=${field}`)
-      setSoilData(response.data)
-    } catch (error) {
-      console.error('Error fetching soil data:', error)
-    } finally {
-      setLoading(false)
-    }
-  }
 
   const getMoistureStatus = (moisture) => {
     if (moisture < 40) return 'low'

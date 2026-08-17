@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Leaf, Cloud, Droplet, Bug, ArrowRight, CheckCircle2, Menu } from 'lucide-react'
+import { Leaf, Cloud, Droplet, Bug, ArrowRight, CheckCircle2 } from 'lucide-react'
 import { useState } from 'react'
 
 // Images

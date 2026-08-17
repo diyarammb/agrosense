@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Cloud, Droplets, Wind, Thermometer, MapPin, AlertCircle } from 'lucide-react'
-const API_BASE = process.env.REACT_APP_API_URL
+const API_BASE = process.env.REACT_APP_API_URL || ''
 
 function Weather() {
   const [location, setLocation] = useState('Hyderabad,Sindh,PK')
@@ -10,20 +10,20 @@ function Weather() {
   const [inputLocation, setInputLocation] = useState('Hyderabad,Sindh,PK')
 
   useEffect(() => {
+    const fetchWeather = async () => {
+      setLoading(true)
+      try {
+        const response = await axios.get(`${API_BASE}/api/weather?location=${location}`)
+        setWeatherData(response.data)
+        setLoading(false)
+      } catch (error) {
+        console.error('Error fetching weather:', error)
+        setLoading(false)
+      }
+    }
+
     fetchWeather()
   }, [location])
-
-  const fetchWeather = async () => {
-    setLoading(true)
-    try {
-      const response = await axios.get(`${API_BASE}/api/weather?location=${location}`)
-      setWeatherData(response.data)
-      setLoading(false)
-    } catch (error) {
-      console.error('Error fetching weather:', error)
-      setLoading(false)
-    }
-  }
 
   const handleLocationChange = (e) => {
     e.preventDefault()

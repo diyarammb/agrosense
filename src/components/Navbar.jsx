@@ -10,7 +10,6 @@ export default function Navbar() {
 
 
   useEffect(() => {
-    const token = localStorage.getItem("token")
     const username = localStorage.getItem("username")
     setUserName(username)
     // if (!token) return

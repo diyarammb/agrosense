@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 import { Upload, Bug, AlertTriangle, CheckCircle } from 'lucide-react'
-const API_BASE = process.env.REACT_APP_API_URL 
+const API_BASE = process.env.REACT_APP_API_URL || ''
 
 function PestDetection() {
   const [selectedImage, setSelectedImage] = useState(null)
